@@ -2324,4 +2324,12 @@ window.initGRPCForm = function(services, invokeURI, metadataURI, debug) {
 
     // add a single blank entry to request metadata table
     addMetadataRow();
+
+    const parameters = JSON.parse(decodeURIComponent(location.hash.slice(1)));
+    const { metadata } = parameters;
+    Object.keys(metadata).forEach((key, index) => {
+        $('.grpc-request-table tr input.name')[index].value = key;
+        $('.grpc-request-table tr input.value')[index].value = metadata[key];
+        addMetadataRow();
+    });
 };
