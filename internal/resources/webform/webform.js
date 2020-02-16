@@ -2314,6 +2314,13 @@ window.initGRPCForm = function(services, invokeURI, metadataURI, debug) {
             invoke();
         }
     });
+    $(".grpc-copy").click(function(e) {
+        var service = $('#grpc-service').val();
+        var method = $('#grpc-method').val();
+        var body = JSON.stringify(JSON.parse($('#grpc-request-raw-text').val()));
+        var host = 'localhost:50051';
+        $('#grpcurl').val('grpcurl -plaintext -d ' + body + ' ' + host + ' ' + service + '/' + method);
+    });
 
     // TODO(jh): support populating the selected method and even request
     // data and metadata from URL hash fragment (and add a way for user to
